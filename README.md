@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/caioariede/nvim-persist-window/actions/workflows/ci.yml/badge.svg)](https://github.com/caioariede/nvim-persist-window/actions/workflows/ci.yml)
 [![Code Quality](https://github.com/caioariede/nvim-persist-window/actions/workflows/quality.yml/badge.svg)](https://github.com/caioariede/nvim-persist-window/actions/workflows/quality.yml)
-[![Latest Release](https://img.shields.io/github/v/tag/caioariede/nvim-persist-window?label=version)](https://github.com/caioariede/nvim-persist-window/releases/latest)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/caioariede/nvim-persist-window)](https://github.com/caioariede/nvim-persist-window/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Keeps floating windows available across tabs in Neovim.
