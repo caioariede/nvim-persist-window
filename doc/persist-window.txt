@@ -1,0 +1,192 @@
+*persist-window.txt*	Persistent floating windows for Neovim
+
+Author: persist-window contributors
+License: MIT
+
+==============================================================================
+CONTENTS					*persist-window-contents*
+
+1. Introduction			|persist-window-introduction|
+2. Installation			|persist-window-installation|
+3. Commands			|persist-window-commands|
+4. Configuration		|persist-window-configuration|
+5. Usage Examples		|persist-window-examples|
+6. Functions			|persist-window-functions|
+
+==============================================================================
+1. INTRODUCTION					*persist-window-introduction*
+
+persist-window.nvim is a Neovim plugin that makes floating windows persistent
+across tabs by maintaining references to actual window instances rather than
+recreating them.
+
+Features:~
+• True Persistence - Same window instance across tabs (no content duplication)
+• Performance - No content copying or window recreation  
+• Tab Independence - Detach floating windows from tab-local scope
+• Real-time Updates - Changes in one tab visible in others
+• Memory Efficient - Minimal state management
+• Always On Top - Keep windows visible across all tab switches
+
+Requirements:~
+• Neovim 0.8.0+
+
+==============================================================================
+2. INSTALLATION					*persist-window-installation*
+
+Via vim-plug:~
+>
+    Plug 'caioariede/nvim-persist-window'
+<
+
+For local development:~
+>
+    Plug '~/path/to/persist-window.nvim'
+<
+
+Commands are available immediately after installation!
+
+Optional configuration (only needed to change defaults):~
+>
+    lua << EOF
+    require('persist-window').setup({
+      always_on_top = false,  -- Keep windows visible across tab switches
+    })
+    EOF
+<
+
+==============================================================================
+3. COMMANDS					*persist-window-commands*
+
+						*:ListWindows*
+:ListWindows		List all floating windows across all tabs.
+			Shows window ID, buffer name, dimensions, position,
+			and which tab each window belongs to.
+
+						*:PersistWindow*
+:PersistWindow [ID]	Persist a floating window. If no ID is provided,
+			automatically selects the window if only one exists,
+			otherwise prompts for selection.
+
+						*:ToggleWindow*
+:ToggleWindow		Show/hide the persisted floating window.
+			If the window is visible, it will be hidden.
+			If hidden, it will be shown in the current tab.
+
+						*:PersistWindowInfo*
+:PersistWindowInfo	Show detailed information about the currently
+			persisted window, including ID, buffer, size,
+			position, visibility status, and persistence time.
+
+						*:PersistWindowAlwaysOnTop*
+:PersistWindowAlwaysOnTop [on|off]
+			Toggle or set always-on-top mode for the persisted
+			window. When enabled, the window stays visible
+			across all tab switches.
+
+==============================================================================
+4. CONFIGURATION				*persist-window-configuration*
+
+Call the setup function to configure the plugin:~
+>
+    require('persist-window').setup({
+      always_on_top = false,  -- boolean: Keep windows visible across tabs
+    })
+<
+
+Configuration options:~
+
+always_on_top	(boolean, default: false)
+		When enabled, persisted windows remain visible when
+		switching tabs instead of being auto-hidden.
+
+==============================================================================
+5. USAGE EXAMPLES				*persist-window-examples*
+
+Basic workflow:~
+>
+    " Open a floating window (e.g., help)
+    :help
+    
+    " Persist the floating window
+    :PersistWindow
+    
+    " Switch to another tab
+    :tabnew
+    
+    " Show the persisted window in the new tab
+    :ToggleWindow
+    
+    " Hide the window
+    :ToggleWindow
+<
+
+Multiple floating windows:~
+>
+    " Open multiple floating windows
+    :help
+    :terminal
+    
+    " List all floating windows to see their IDs
+    :ListWindows
+    
+    " Persist a specific window by ID
+    :PersistWindow 1002
+<
+
+Always-on-top mode:~
+>
+    " Open and persist a window
+    :help
+    :PersistWindow
+    
+    " Enable always-on-top for this window
+    :PersistWindowAlwaysOnTop on
+    
+    " Now the window stays visible when switching tabs
+    :tabnew
+    
+    " Disable always-on-top
+    :PersistWindowAlwaysOnTop off
+<
+
+==============================================================================
+6. FUNCTIONS					*persist-window-functions*
+
+						*persist-window.setup()*
+require('persist-window').setup({opts})
+		Initialize the plugin with configuration options.
+		
+		Parameters:~
+		{opts} (table|nil) Configuration table with options:
+		  • always_on_top (boolean): Enable always-on-top mode
+
+						*persist-window.list_windows()*
+require('persist-window').list_windows()
+		List all floating windows across all tabs.
+
+						*persist-window.persist_window()*
+require('persist-window').persist_window({win_id_str})
+		Persist a floating window by ID.
+		
+		Parameters:~
+		{win_id_str} (string|nil) Window ID as string, or nil for
+		                         auto-selection/prompt
+
+						*persist-window.toggle_window()*
+require('persist-window').toggle_window()
+		Toggle visibility of the persisted floating window.
+
+						*persist-window.show_window_info()*
+require('persist-window').show_window_info()
+		Show detailed information about the persisted window.
+
+						*persist-window.toggle_always_on_top()*
+require('persist-window').toggle_always_on_top({value})
+		Toggle or set always-on-top mode.
+		
+		Parameters:~
+		{value} (string|nil) "on"/"off" to set, nil to toggle
+
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:

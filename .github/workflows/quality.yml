@@ -1,0 +1,96 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Install StyLua
+      uses: JohnnyMorganz/stylua-action@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        version: latest
+        args: --check lua/
+    
+    - name: Check formatting
+      run: |
+        echo "Checking Lua code formatting with StyLua..."
+        if ! stylua --check lua/; then
+          echo "❌ Code formatting issues found!"
+          echo "Run 'stylua lua/' to fix formatting issues."
+          exit 1
+        fi
+        echo "✅ All files are properly formatted!"
+
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Install Lua
+      uses: leafo/gh-actions-lua@v10
+      with:
+        luaVersion: "5.1"
+    
+    - name: Install LuaRocks
+      uses: leafo/gh-actions-luarocks@v4
+    
+    - name: Install luacheck
+      run: luarocks install luacheck
+    
+    - name: Run luacheck
+      run: |
+        echo "Running luacheck static analysis..."
+        luacheck lua/ --config .luacheckrc
+        echo "✅ Luacheck passed!"
+
+  documentation:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Check documentation
+      run: |
+        echo "Checking documentation completeness..."
+        
+        # Check if key files exist
+        if [ ! -f "README.md" ]; then
+          echo "❌ README.md is missing!"
+          exit 1
+        fi
+        
+        if [ ! -f "CLAUDE.md" ]; then
+          echo "❌ CLAUDE.md is missing!"
+          exit 1
+        fi
+        
+        if [ ! -f "SPEC.md" ]; then
+          echo "❌ SPEC.md is missing!"
+          exit 1
+        fi
+        
+        # Check if README has basic sections
+        if ! grep -q "## Installation" README.md; then
+          echo "❌ README.md missing Installation section!"
+          exit 1
+        fi
+        
+        if ! grep -q "## Usage" README.md || ! grep -q "## Commands" README.md; then
+          echo "❌ README.md missing Usage or Commands section!"
+          exit 1
+        fi
+        
+        echo "✅ Documentation check passed!"
