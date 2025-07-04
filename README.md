@@ -227,9 +227,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, testing guidelines
 
 This project uses GitHub Actions for continuous integration and automated releases:
 
-[![CI](https://github.com/caioariede/nvim-persist-window/actions/workflows/ci.yml/badge.svg)](https://github.com/caioariede/nvim-persist-window/actions/workflows/ci.yml)
-[![Code Quality](https://github.com/caioariede/nvim-persist-window/actions/workflows/quality.yml/badge.svg)](https://github.com/caioariede/nvim-persist-window/actions/workflows/quality.yml)
-
 - **Automated Testing**: Tests run against multiple Neovim versions (0.8.0+)
 - **Code Quality**: Enforced formatting with StyLua and linting with luacheck
 - **Semantic Releases**: Automated version bumping and changelog generation
