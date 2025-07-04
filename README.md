@@ -1,5 +1,11 @@
 # persist-window.nvim
 
+[![CI](https://github.com/caioariede/nvim-persist-window/actions/workflows/ci.yml/badge.svg)](https://github.com/caioariede/nvim-persist-window/actions/workflows/ci.yml)
+[![Code Quality](https://github.com/caioariede/nvim-persist-window/actions/workflows/quality.yml/badge.svg)](https://github.com/caioariede/nvim-persist-window/actions/workflows/quality.yml)
+[![Latest Release](https://github.com/caioariede/nvim-persist-window/actions/workflows/release.yml/badge.svg)](https://github.com/caioariede/nvim-persist-window/releases/latest)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/caioariede/nvim-persist-window)](https://github.com/caioariede/nvim-persist-window/releases/latest)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Keeps floating windows available across tabs in Neovim.
 
 When you switch tabs, floating windows (terminals, help, etc.) normally disappear. This plugin saves them so you can toggle them back instantly from any tab.
