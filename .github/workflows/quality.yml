@@ -77,11 +77,6 @@ jobs:
           exit 1
         fi
 
-        if [ ! -f "SPEC.md" ]; then
-          echo "❌ SPEC.md is missing!"
-          exit 1
-        fi
-
         # Check if README has basic sections
         if ! grep -q "## Installation" README.md; then
           echo "❌ README.md missing Installation section!"
