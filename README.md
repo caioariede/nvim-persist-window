@@ -40,6 +40,10 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 | `:PersistWindowInfo` | Show information about saved window |
 | `:PersistWindowAlwaysOnTop [on/off]` | Keep window visible across tab switches |
 
+## Usage
+
+See detailed workflow below.
+
 ## 🎯 Usage Workflow
 
 1. **Open a floating window** (terminal, help, custom plugin, etc.)
