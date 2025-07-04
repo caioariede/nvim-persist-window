@@ -192,16 +192,19 @@ lua/persist-window/
 
 1. **Basic ListWindows (Tab-Agnostic)**
    ```vim
-   :help
-   :ListWindows  " Should show the help window with [Tab 1] indicator
+   " Create a floating help window
+   :lua vim.cmd('help'); vim.api.nvim_win_set_config(0, {relative='editor', width=80, height=20, row=5, col=10})
+   :ListWindows  " Should show the floating help window with [Tab 1] indicator
    ```
 
 2. **Cross-Tab Window Detection**
    ```vim
-   :help
+   " Create floating help window in tab 1
+   :lua vim.cmd('help'); vim.api.nvim_win_set_config(0, {relative='editor', width=80, height=20, row=5, col=10})
    :tabnew
-   :terminal
-   :ListWindows  " Should show both windows from different tabs
+   " Create floating terminal in tab 2
+   :lua vim.cmd('terminal'); vim.api.nvim_win_set_config(0, {relative='editor', width=60, height=15, row=10, col=20})
+   :ListWindows  " Should show both floating windows from different tabs
    ```
 
 3. **No Floating Windows**
@@ -211,15 +214,17 @@ lua/persist-window/
 
 4. **Cross-Tab Window Persistence**
    ```vim
-   :help
+   " Create floating help window
+   :lua vim.cmd('help'); vim.api.nvim_win_set_config(0, {relative='editor', width=80, height=20, row=5, col=10})
    :tabnew
-   :PersistWindow 1001  " Persist window from another tab
+   :PersistWindow 1001  " Persist window from another tab (use actual window ID)
    :ToggleWindow        " Should show/hide the help window in current tab
    ```
 
 5. **Auto-Hide on Tab Switch**
    ```vim
-   :help
+   " Create floating help window
+   :lua vim.cmd('help'); vim.api.nvim_win_set_config(0, {relative='editor', width=80, height=20, row=5, col=10})
    :PersistWindow
    :ToggleWindow  " Show window
    :tabnew        " Window should auto-hide
