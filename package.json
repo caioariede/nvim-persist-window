@@ -1,0 +1,17 @@
+{
+  "name": "nvim-persist-float",
+  "version": "1.0.0",
+  "description": "Neovim plugin for persisting floating windows across tabs",
+  "private": true,
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^10.0.3",
+    "semantic-release": "^23.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/caioariede/nvim-persist-float.git"
+  },
+  "license": "MIT"
+}
