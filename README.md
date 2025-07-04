@@ -52,23 +52,28 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 ### Basic Usage
 
 ```vim
-" Open help in floating window
-:help
-" Persist the floating window
+" 1. First, create a floating window (using any method you prefer)
+"    For example, using a plugin like telescope, or manually:
+:lua vim.cmd('terminal'); vim.api.nvim_win_set_config(0, {relative='editor', width=80, height=20, row=5, col=10})
+
+" 2. Persist the floating window
 :PersistWindow
-" Switch to another tab
+
+" 3. Switch to another tab
 :tabnew
-" Show the persisted window
+
+" 4. Show the persisted window in the new tab
 :ToggleWindow
 ```
 
 ### Multiple Floating Windows
 
 ```vim
-" Open multiple floating windows
-:help
-:terminal
-" List all floating windows
+" Open multiple floating windows (example assumes you have plugins that create them)
+" Or create them manually - this is just to show the concept:
+" (In practice, floating windows are usually created by plugins like telescope, nvim-tree, etc.)
+
+" List all floating windows that exist
 :ListWindows
 " Output:
 " Floating Windows (All Tabs):
