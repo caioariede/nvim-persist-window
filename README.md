@@ -11,6 +11,26 @@ When you switch tabs, floating windows (terminals, help, etc.) normally disappea
 
 <img width="1488" alt="screenshot" src="https://github.com/user-attachments/assets/af0b5d5a-d40a-423b-9cbf-d10a967acb55" />
 
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Commands](#commands)
+- [Usage](#usage)
+- [Usage Workflow](#-usage-workflow)
+- [Examples](#-examples)
+  - [Basic Usage](#basic-usage)
+  - [Multiple Floating Windows](#multiple-floating-windows)
+  - [Claude Code Integration](#claude-code-integration)
+  - [Always On Top Mode](#always-on-top-mode)
+- [Development](#development)
+  - [Quick Start](#quick-start)
+  - [Testing](#testing)
+  - [Architecture](#architecture)
+  - [Project Structure](#project-structure)
+  - [Contributing](#contributing)
+  - [CI/CD](#cicd)
+
 ## Features
 
 - Keep floating windows across tab switches
