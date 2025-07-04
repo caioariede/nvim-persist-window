@@ -54,7 +54,7 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 ```vim
 " 1. First, create a floating window (using any method you prefer)
 "    For example, using a plugin like telescope, or manually:
-:lua vim.cmd('terminal'); vim.api.nvim_win_set_config(0, {relative='editor', width=80, height=20, row=5, col=10})
+:lua vim.cmd('help'); vim.api.nvim_win_set_config(0, {relative='editor', width=80, height=20, row=5, col=10})
 
 " 2. Persist the floating window
 :PersistWindow
