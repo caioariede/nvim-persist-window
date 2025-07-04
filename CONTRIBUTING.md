@@ -67,7 +67,7 @@ nvim -u .dev/init.lua -c "PlenaryBustedFile tests/window_spec.lua"
 We use [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) for testing. Test files are located in `tests/`:
 
 - `window_spec.lua` - Window management functions
-- `state_spec.lua` - State management functions  
+- `state_spec.lua` - State management functions
 - `integration_spec.lua` - Command integration tests
 
 Example test structure:
@@ -76,7 +76,7 @@ describe("my_module", function()
   before_each(function()
     -- Setup before each test
   end)
-  
+
   it("should do something", function()
     assert.are.equal(expected, actual)
   end)

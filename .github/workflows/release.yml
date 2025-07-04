@@ -12,39 +12,39 @@ jobs:
       contents: write
       issues: write
       pull-requests: write
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
         token: ${{ secrets.GITHUB_TOKEN }}
-    
+
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '20'
         cache: 'npm'
-    
+
     - name: Install dependencies
       run: npm ci
-    
+
     - name: Install Neovim
       uses: rhysd/action-setup-vim@v1
       with:
         neovim: true
         version: 'stable'
-    
+
     - name: Setup development environment
       run: |
         chmod +x ./scripts/setup-dev.sh
         ./scripts/setup-dev.sh
-    
+
     - name: Run tests
       run: |
         chmod +x ./.dev/run-tests.sh
         ./.dev/run-tests.sh
-    
+
     - name: Release
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

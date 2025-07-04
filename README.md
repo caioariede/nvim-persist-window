@@ -7,7 +7,7 @@ When you switch tabs, floating windows (terminals, help, etc.) normally disappea
 ## Features
 
 - Keep floating windows across tab switches
-- Toggle windows on/off from any tab  
+- Toggle windows on/off from any tab
 - Always-on-top mode to keep windows visible
 - Works with any floating window (terminals, help, plugins)
 
@@ -41,7 +41,7 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 ## 🎯 Usage Workflow
 
 1. **Open a floating window** (terminal, help, custom plugin, etc.)
-2. **List windows** (optional): `:ListWindows` 
+2. **List windows** (optional): `:ListWindows`
 3. **Persist window**: `:PersistWindow`
 4. **Switch to different tab**
 5. **Toggle window**: `:ToggleWindow` to show the persisted window
@@ -79,7 +79,7 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim):
 " Floating Windows (All Tabs):
 " 1. Window 1001 - [No Name] (10x20 at row 5, col 10) [Tab 1]
 " 2. Window 1002 - "help.txt" (15x30 at row 2, col 25) [Tab 2]
-" 
+"
 " Use :PersistWindow [ID] to persist a specific window
 " Note: HIDDEN windows are persisted but currently off-screen
 
@@ -179,7 +179,7 @@ nvim -u .dev/init.lua
 # All tests
 ./.dev/run-tests.sh
 
-# Individual test files  
+# Individual test files
 nvim -u .dev/init.lua -c "PlenaryBustedFile tests/window_spec.lua"
 ```
 
@@ -190,7 +190,7 @@ nvim -u .dev/init.lua -c "PlenaryBustedFile tests/window_spec.lua"
 Instead of capturing and recreating window state, we:
 
 1. **Persist Reference** - Store actual window and buffer IDs
-2. **Control Visibility** - Use `nvim_win_hide()` and `nvim_win_set_config()` 
+2. **Control Visibility** - Use `nvim_win_hide()` and `nvim_win_set_config()`
 3. **Tab Independence** - Detach from tab-local behavior
 
 ### Project Structure
@@ -199,7 +199,7 @@ Instead of capturing and recreating window state, we:
 persist-window.nvim/
 ├── lua/persist-window/
 │   ├── init.lua         # Main entry point and commands
-│   ├── window.lua       # Window detection and management  
+│   ├── window.lua       # Window detection and management
 │   ├── state.lua        # State management
 │   └── ui.lua          # User interface functions
 ├── tests/               # Comprehensive test suite

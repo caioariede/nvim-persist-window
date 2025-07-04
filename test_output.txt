@@ -1,0 +1,4 @@
+
+persist-float.nvim development environment loaded!
+Available commands: :ListWindows, :PersistWindow, :ToggleWindow, :PersistWindowInfo
+Run tests with: :lua require('plenary.test_harness').test_directory('tests/')

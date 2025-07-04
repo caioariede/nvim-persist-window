@@ -65,7 +65,7 @@ lua/persist-window/
 -- Single global state in state.lua
 M.persisted_window = {
   window_id = 1001,     -- Actual window ID
-  buffer_id = 42,       -- Actual buffer ID  
+  buffer_id = 42,       -- Actual buffer ID
   is_visible = true,    -- Current visibility
   last_tab = 2,         -- Last tab where visible
   config = {},          -- Original window config
@@ -99,7 +99,7 @@ end
 
 #### Test Structure
 - `tests/window_spec.lua` - Window detection and management functions
-- `tests/state_spec.lua` - State management and persistence logic  
+- `tests/state_spec.lua` - State management and persistence logic
 - `tests/integration_spec.lua` - End-to-end command workflows
 
 #### Key Testing Patterns
@@ -138,7 +138,7 @@ function M.validate_window(win_id)
 ### Implementation Status
 All core functionality has been completed and tested:
 1. ✅ Complete window show/hide logic in `:ToggleWindow`
-2. ✅ Cross-tab window recreation and positioning 
+2. ✅ Cross-tab window recreation and positioning
 3. ✅ Window validation and cleanup automations
 4. ✅ Enhanced error handling for edge cases
 5. ✅ Tab-agnostic behavior for all commands

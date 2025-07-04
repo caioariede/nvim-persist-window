@@ -1,0 +1,18 @@
+# StyLua configuration for nvim-persist-window
+# https://github.com/JohnnyMorganz/StyLua
+
+# Line width
+column_width = 120
+
+# Indentation
+indent_type = "Spaces"
+indent_width = 2
+
+# Quote style
+quote_style = "AutoPreferDouble"
+
+# Call parentheses
+call_parentheses = "Always"
+
+# Collapse simple statements
+collapse_simple_statement = "Never"

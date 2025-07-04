@@ -20,11 +20,11 @@ function M.set_persisted_window(win_id)
   if not vim.api.nvim_win_is_valid(win_id) then
     return false
   end
-  
+
   local buf_id = vim.api.nvim_win_get_buf(win_id)
   local config = vim.api.nvim_win_get_config(win_id)
   local current_tab = vim.api.nvim_get_current_tabpage()
-  
+
   M.persisted_window = {
     window_id = win_id,
     buffer_id = buf_id,
@@ -35,9 +35,9 @@ function M.set_persisted_window(win_id)
       created_at = os.date("%Y-%m-%d %H:%M:%S"),
       persistent_id = tostring(win_id) .. "_" .. tostring(os.time()),
     },
-    always_on_top = false,  -- Default to false, can be toggled later
+    always_on_top = false, -- Default to false, can be toggled later
   }
-  
+
   return true
 end
 

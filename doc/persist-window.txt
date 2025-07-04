@@ -22,7 +22,7 @@ recreating them.
 
 Features:~
 • True Persistence - Same window instance across tabs (no content duplication)
-• Performance - No content copying or window recreation  
+• Performance - No content copying or window recreation
 • Tab Independence - Detach floating windows from tab-local scope
 • Real-time Updates - Changes in one tab visible in others
 • Memory Efficient - Minimal state management
@@ -107,16 +107,16 @@ Basic workflow:~
 >
     " Open a floating window (e.g., help)
     :help
-    
+
     " Persist the floating window
     :PersistWindow
-    
+
     " Switch to another tab
     :tabnew
-    
+
     " Show the persisted window in the new tab
     :ToggleWindow
-    
+
     " Hide the window
     :ToggleWindow
 <
@@ -126,10 +126,10 @@ Multiple floating windows:~
     " Open multiple floating windows
     :help
     :terminal
-    
+
     " List all floating windows to see their IDs
     :ListWindows
-    
+
     " Persist a specific window by ID
     :PersistWindow 1002
 <
@@ -139,13 +139,13 @@ Always-on-top mode:~
     " Open and persist a window
     :help
     :PersistWindow
-    
+
     " Enable always-on-top for this window
     :PersistWindowAlwaysOnTop on
-    
+
     " Now the window stays visible when switching tabs
     :tabnew
-    
+
     " Disable always-on-top
     :PersistWindowAlwaysOnTop off
 <
@@ -156,7 +156,7 @@ Always-on-top mode:~
 						*persist-window.setup()*
 require('persist-window').setup({opts})
 		Initialize the plugin with configuration options.
-		
+
 		Parameters:~
 		{opts} (table|nil) Configuration table with options:
 		  • always_on_top (boolean): Enable always-on-top mode
@@ -168,7 +168,7 @@ require('persist-window').list_windows()
 						*persist-window.persist_window()*
 require('persist-window').persist_window({win_id_str})
 		Persist a floating window by ID.
-		
+
 		Parameters:~
 		{win_id_str} (string|nil) Window ID as string, or nil for
 		                         auto-selection/prompt
@@ -184,7 +184,7 @@ require('persist-window').show_window_info()
 						*persist-window.toggle_always_on_top()*
 require('persist-window').toggle_always_on_top({value})
 		Toggle or set always-on-top mode.
-		
+
 		Parameters:~
 		{value} (string|nil) "on"/"off" to set, nil to toggle
 
