@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2](https://github.com/caioariede/nvim-persist-window/compare/v1.1.1...v1.1.2) (2025-07-04)
+
+
+### Bug Fixes
+
+* improve README section detection in documentation check ([d5e2023](https://github.com/caioariede/nvim-persist-window/commit/d5e20234611d5130241c7f5acf4fc9c132a7cdcf))
+
 ## [1.1.1](https://github.com/caioariede/nvim-persist-window/compare/v1.1.0...v1.1.1) (2025-07-04)
 
 
