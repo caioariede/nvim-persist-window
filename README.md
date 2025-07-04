@@ -4,6 +4,8 @@ Keeps floating windows available across tabs in Neovim.
 
 When you switch tabs, floating windows (terminals, help, etc.) normally disappear. This plugin saves them so you can toggle them back instantly from any tab.
 
+<img width="1488" alt="screenshot" src="https://github.com/user-attachments/assets/af0b5d5a-d40a-423b-9cbf-d10a967acb55" />
+
 ## Features
 
 - Keep floating windows across tab switches
