@@ -5,6 +5,8 @@ describe("persist-window integration", function()
   before_each(function()
     -- Setup the plugin
     persist_float.setup({})
+    -- Load plugin commands (simulate what plugin/persist-window.lua does)
+    dofile(vim.fn.getcwd() .. "/plugin/persist-window.lua")
   end)
   
   describe("ListWindows command", function()
