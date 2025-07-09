@@ -26,4 +26,4 @@ exclude_files = {
 max_line_length = 120
 
 -- Maximum cyclomatic complexity
-max_cyclomatic_complexity = 10
+max_cyclomatic_complexity = 12

@@ -1,10 +1,14 @@
 -- Integration tests for persist-window.nvim commands
 local persist_float = require("persist-window")
+local state = require("persist-window.state")
+local window = require("persist-window.window")
 
 describe("persist-window integration", function()
   before_each(function()
     -- Setup the plugin
     persist_float.setup({})
+    -- Clear any existing autocmds to avoid conflicts
+    pcall(vim.api.nvim_del_augroup_by_name, "PersistWindowTabSwitch")
     -- Load plugin commands (simulate what plugin/persist-window.lua does)
     dofile(vim.fn.getcwd() .. "/plugin/persist-window.lua")
   end)
