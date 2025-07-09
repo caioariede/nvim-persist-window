@@ -1,14 +1,18 @@
 -- Integration tests for persist-window.nvim commands
-local persist_float = require("persist-window")
-local state = require("persist-window.state")
-local window = require("persist-window.window")
+local persist_float, state, window
 
 describe("persist-window integration", function()
   before_each(function()
     -- Clear cached modules to get fresh copy
     package.loaded["persist-window"] = nil
     package.loaded["persist-window.init"] = nil
+    package.loaded["persist-window.state"] = nil
+    package.loaded["persist-window.window"] = nil
+
+    -- Load fresh modules
     persist_float = require("persist-window")
+    state = require("persist-window.state")
+    window = require("persist-window.window")
 
     -- Setup the plugin
     persist_float.setup({})
@@ -184,6 +188,46 @@ describe("persist-window integration", function()
     end)
   end)
 
-  -- Note: Tab close handling is tested separately due to module loading complexities
-  -- The functionality is verified through manual testing and the fix is in place
+  describe("tab close regression test", function()
+    it("should maintain window state after tab close with always_on_top", function()
+      -- Clear state
+      state.clear_persisted_window()
+
+      -- Create and persist a window
+      local buf = vim.api.nvim_create_buf(false, true)
+      local win = vim.api.nvim_open_win(buf, false, {
+        relative = "editor",
+        width = 10,
+        height = 5,
+        col = 0,
+        row = 0,
+      })
+
+      state.set_persisted_window(win)
+      state.set_always_on_top(true)
+
+      -- Verify window is persisted
+      local persisted = state.get_persisted_window()
+      assert.is_not_nil(persisted)
+      assert.is_true(persisted.always_on_top)
+
+      -- Create and close a tab (this tests the bug fix)
+      vim.cmd("tabnew")
+      vim.cmd("tabclose")
+
+      -- Window should still be persisted (this would fail before the fix)
+      local still_persisted = state.get_persisted_window()
+      assert.is_not_nil(still_persisted, "Window should still be persisted after tab close")
+      assert.is_true(still_persisted.always_on_top, "Always-on-top should still be enabled")
+
+      -- Clean up
+      if vim.api.nvim_win_is_valid(win) then
+        vim.api.nvim_win_close(win, true)
+      end
+      if vim.api.nvim_buf_is_valid(buf) then
+        vim.api.nvim_buf_delete(buf, { force = true })
+      end
+      state.clear_persisted_window()
+    end)
+  end)
 end)
