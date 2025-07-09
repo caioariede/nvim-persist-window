@@ -10,6 +10,9 @@ M.config = {
   always_on_top = false, -- Keep window visible across tab switches
 }
 
+-- Internal state to track if we're handling a tab close
+local handling_tab_close = false
+
 ---Setup function for the plugin (optional - for configuration only)
 ---@param opts table|nil Configuration options
 function M.setup(opts)
@@ -191,7 +194,10 @@ function M.handle_tab_switch()
 
   -- Check if the persisted window is valid
   if not state.is_window_valid(persisted.window_id) then
-    state.clear_persisted_window()
+    -- Don't clear state if we're handling a tab close - the window might be recreated
+    if not handling_tab_close then
+      state.clear_persisted_window()
+    end
     return
   end
 
@@ -222,6 +228,70 @@ function M.handle_tab_switch()
         state.update_visibility(false)
       end
     end
+  end
+end
+
+---Handle tab close event to maintain window in remaining tabs
+function M.handle_tab_close()
+  local persisted = state.get_persisted_window()
+
+  if not persisted then
+    return
+  end
+
+  -- If always_on_top is enabled and window was visible, ensure it's shown in the active tab
+  if persisted.always_on_top and persisted.is_visible then
+    -- Set flag to prevent handle_tab_switch from clearing state
+    handling_tab_close = true
+
+    -- We need to delay this slightly to allow the tab close to complete
+    vim.defer_fn(function()
+      -- Check if the buffer is still valid
+      if not vim.api.nvim_buf_is_valid(persisted.buffer_id) then
+        state.clear_persisted_window()
+        handling_tab_close = false
+        return
+      end
+
+      -- Check if window is still valid after tab close
+      if not state.is_window_valid(persisted.window_id) then
+        -- Window was destroyed (likely in the closed tab), recreate it
+        local current_tab = vim.api.nvim_get_current_tabpage()
+
+        -- Recreate the window using the original buffer and config
+        local new_win_id = vim.api.nvim_open_win(persisted.buffer_id, false, persisted.config)
+
+        if new_win_id and vim.api.nvim_win_is_valid(new_win_id) then
+          -- Update state with new window ID
+          state.update_window_id(new_win_id)
+          state.update_last_tab(current_tab)
+          state.update_visibility(true)
+        else
+          -- Failed to recreate window
+          state.clear_persisted_window()
+          handling_tab_close = false
+        end
+      else
+        -- Window is still valid, just ensure it's visible in current tab
+        local current_tab = vim.api.nvim_get_current_tabpage()
+        local success, new_win_id = window.show_window(persisted.window_id, persisted.config)
+
+        if success then
+          state.update_last_tab(current_tab)
+          -- Update window ID if window was recreated
+          if new_win_id then
+            state.update_window_id(new_win_id)
+          end
+        else
+          -- If we couldn't show the window, clear the state
+          state.clear_persisted_window()
+          handling_tab_close = false
+        end
+      end
+
+      -- Reset the flag
+      handling_tab_close = false
+    end, 50) -- Small delay to ensure tab close is complete
   end
 end
 

@@ -44,10 +44,21 @@ end, {
 })
 
 -- Set up autocmd for tab switching with default behavior
+local augroup = vim.api.nvim_create_augroup("PersistWindowTabSwitch", { clear = true })
+
 vim.api.nvim_create_autocmd("TabEnter", {
-  group = vim.api.nvim_create_augroup("PersistWindowTabSwitch", { clear = true }),
+  group = augroup,
   callback = function()
     persist_window.handle_tab_switch()
   end,
   desc = "Auto-hide persisted windows on tab switch",
+})
+
+-- Set up autocmd for tab closing
+vim.api.nvim_create_autocmd("TabClosed", {
+  group = augroup,
+  callback = function()
+    persist_window.handle_tab_close()
+  end,
+  desc = "Handle persisted windows when tab is closed",
 })
